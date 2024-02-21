@@ -9,5 +9,14 @@ export const unknownEndpoint: RequestHandler = (req, res) => {
 
 export const errorHandler: ErrorRequestHandler = (error, req, res, next) => {
   logger.error(LOG_OWNER, error.message);
-  next(error);
+  const errMessage = error.message.split(":");
+  const statusCode = parseInt(errMessage[0]);
+
+  const message =
+    errMessage.length > 1 ? errMessage.slice(1).join(":") : errMessage[0];
+
+  res.status(statusCode || 500).json({
+    status: false,
+    message,
+  });
 };
