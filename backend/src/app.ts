@@ -7,7 +7,7 @@ import { errorHandler, unknownEndpoint } from "./utils/middleware";
 
 // Routes
 import router from "./routes/root.router";
-import { logger, morganwrapped } from "./utils/logger";
+import { morganwrapped } from "./utils/logger";
 
 const app = express();
 
